@@ -1,10 +1,8 @@
 [package]
-name = "greeter"
+name = "lightdm-gobject-sys"
 version = "0.1.0"
 edition = "2021"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-glib-sys = "0.15.6"
-lightdm-gobject-sys = { path = "../lightdm-gobject-sys" }
