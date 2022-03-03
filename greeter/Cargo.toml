@@ -6,5 +6,6 @@ edition = "2021"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-glib-sys = "0.15.6"
+glib = "0.15.6"
+gio = "0.15.6"
 lightdm-gobject-sys = { path = "../lightdm-gobject-sys" }
