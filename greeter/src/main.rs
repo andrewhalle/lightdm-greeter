@@ -37,10 +37,29 @@
 // fn authentication_complete(values: &[Value]) -> Option<Value> {
 //     None
 // }
+use std::fs::OpenOptions;
+use std::io::Write;
+use std::ptr;
+
 use gtk::prelude::*;
 use gtk::{Application, ApplicationWindow, Button};
 
+use lightdm_gobject_sys::{lightdm_greeter_connect_to_daemon_sync, lightdm_greeter_new};
+
 fn main() {
+    let mut log_file = OpenOptions::new()
+        .create(true)
+        .write(true)
+        .truncate(true)
+        .open("/tmp/andrew-greeter.log")
+        .unwrap();
+    write!(log_file, "[greeter] running").unwrap();
+    unsafe {
+        let greeter = lightdm_greeter_new();
+        let status = lightdm_greeter_connect_to_daemon_sync(greeter, ptr::null_mut());
+        write!(log_file, "[greeter] lightdm connection status: {}", status).unwrap();
+    }
+
     let app = Application::builder()
         .application_id("dev.andrewhalle.greeter")
         .build();
